@@ -12,23 +12,30 @@ using System.Threading.Tasks;
 namespace Bookstore.Infrastructure
 {
     [HtmlTargetElement("div", Attributes = "page-numbering")]
-    public class PagnationTagHelper : TagHelper 
+    public class PagnationTagHelper : TagHelper
     {
 
         private IUrlHelperFactory uhf;
 
-        public PagnationTagHelper (IUrlHelperFactory temp)
+        public PagnationTagHelper(IUrlHelperFactory temp)
         {
-            uhf = temp; 
+            uhf = temp;
         }
 
         [ViewContext]
         [HtmlAttributeNotBound]
         public ViewContext vc { get; set; }
 
-        public PageInfo PageNumbering {get; set; }
+        public PageInfo PageNumbering { get; set; }
         public string PageAction { get; set; }
-        public override void Process (TagHelperContext thc, TagHelperOutput tho)
+
+        public bool PageClassesEnabled { get; set; } = false;
+        public string PageClass { get; set; }
+        public string PageClassNormal { get; set; }
+        public string PageClassSelected { get; set; }
+
+
+        public override void Process(TagHelperContext thc, TagHelperOutput tho)
         {
             IUrlHelper uh = uhf.GetUrlHelper(vc);
 
@@ -39,11 +46,18 @@ namespace Bookstore.Infrastructure
                 TagBuilder tb = new TagBuilder("a");
 
                 tb.Attributes["href"] = uh.Action(PageAction, new { page_number = i });
-                tb.InnerHtml.Append(i.ToString());
 
-                final.InnerHtml.AppendHtml(tb);
+                if (PageClassesEnabled)
+                {
+                    tb.AddCssClass(PageClass);
+                    tb.AddCssClass(i == PageNumbering.CurrentPage
+                    ? PageClassSelected : PageClassNormal);
+                    tb.InnerHtml.Append(i.ToString());
+
+                    final.InnerHtml.AppendHtml(tb);
+                }
+                tho.Content.AppendHtml(final.InnerHtml);
             }
-            tho.Content.AppendHtml(final.InnerHtml);
         }
     }
 }

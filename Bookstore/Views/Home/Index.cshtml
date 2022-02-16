@@ -3,23 +3,49 @@
 
 @model BookViewModel
 
-<h1>This is my bookstore</h1>
-
 @foreach (Book b in Model.Books)
-            {
-                <h1>@b.Title</h1>
+{
+    <div class="card card-outline-primary m-1 p-1">
+        <div class="bg-faded p-1">
+            <h4>
+                @b.Title by @b.Author 
+                <span class="badge badge-pill badge-primary" style="float:right">
+                </span>
+            </h4>
+        </div>
+        <div class="card-text p-1">
+            <div class="text-info badge badge-pill badge-primary" style="float:right">
+                <h4>$@b.Price</h4>
+            </div>
 
-                <ul>
-                    <li>Author: @b.Author</li>
-                    <li>Publisher: @b.Publisher</li>
-                    <li>ISBN: @b.Isbn</li>
-                    <li>Classification: @b.Classification</li>
-                    <li>Category: @b.Category</li>
-                    <li>Page Count: @b.PageCount</li>
-                    <li>Price: $@b.Price</li>
-                </ul>
-            }
+            Publisher: @b.Publisher <br />
+            ISBN: @b.Isbn <br />
+            @b.Classification | @b.Category |
+            @b.PageCount pages<br />
 
-<a asp-action="Index" asp-route-page_number="1">1</a>
+        </div>
+ 
+    </div>
+}
 
-<div page-numbering ="@Model.PageInfo" page-action="Index"></div>
+<div page-numbering="@Model.PageInfo" page-action="Index" page-classes-enabled="true"
+          page-class="btn" page-class-normal="btn-outline-dark"
+          page-class-selected="btn-primary" class="btn-group pull-right m-1">
+</div>
+
+@*<h1>@b.Title</h1>
+
+<ul>
+    <li>Author: @b.Author</li>
+    <li>Publisher: @b.Publisher</li>
+    <li>ISBN: @b.Isbn</li>
+    <li>Classification: @b.Classification</li>
+    <li>Category: @b.Category</li>
+    <li>Page Count: @b.PageCount</li>
+    <li>Price: $@b.Price</li>
+</ul>*@
+
+
+@*<a asp-action="Index" asp-route-page_number="1">1</a>*@
+
+<div page-numbering="@Model.PageInfo" page-action="Index"></div>
