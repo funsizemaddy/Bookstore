@@ -1,0 +1,25 @@
+﻿@{
+}
+
+@model BookViewModel
+
+<h1>This is my bookstore</h1>
+
+@foreach (Book b in Model.Books)
+            {
+                <h1>@b.Title</h1>
+
+                <ul>
+                    <li>Author: @b.Author</li>
+                    <li>Publisher: @b.Publisher</li>
+                    <li>ISBN: @b.Isbn</li>
+                    <li>Classification: @b.Classification</li>
+                    <li>Category: @b.Category</li>
+                    <li>Page Count: @b.PageCount</li>
+                    <li>Price: $@b.Price</li>
+                </ul>
+            }
+
+<a asp-action="Index" asp-route-page_number="1">1</a>
+
+<div page-numbering ="@Model.PageInfo" page-action="Index"></div>
