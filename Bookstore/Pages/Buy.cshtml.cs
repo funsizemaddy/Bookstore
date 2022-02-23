@@ -27,10 +27,10 @@ namespace Bookstore.Pages
         }
         public IActionResult OnPost(int bookId, string returnUrl)
         {
-            Book b = repo.Books.FirstOrDefault(x => x.BookId = bookId);
+            Book b = repo.Books.FirstOrDefault(x => x.BookId == bookId);
 
             basket = HttpContext.Session.GetJson<Basket>("basket") ?? new Basket();
-            basket.AddItem(b, 1);
+            basket.AddItem(b,1,1);
 
             HttpContext.Session.SetJson("basket", basket);
 

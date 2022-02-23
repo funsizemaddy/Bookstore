@@ -9,7 +9,7 @@ namespace Bookstore.Models
     {
         public List<BasketLineItem> Items { get; set; } = new List<BasketLineItem>();
     
-        public void AddItem (Book bo, int qty) 
+        public void AddItem (Book bo, int qty, int cost) 
         {
             BasketLineItem line = Items
                 .Where(b => b.Book.BookId == bo.BookId)
@@ -20,7 +20,8 @@ namespace Bookstore.Models
                 Items.Add(new BasketLineItem
                 {
                     Book = bo,
-                    Quantity = qty
+                    Quantity = qty,
+                    Price = cost
                     
                 });
             }
@@ -32,6 +33,7 @@ namespace Bookstore.Models
         public double CalculateTotal()
         {
             double sum = Items.Sum(x => x.Quantity * x.Price);
+            return sum;
         }
     }
     
@@ -41,5 +43,6 @@ namespace Bookstore.Models
         public Book Book { get; set; }
 
         public int Quantity { get; set; }
+        public int Price { get; set; }
     }
 }
