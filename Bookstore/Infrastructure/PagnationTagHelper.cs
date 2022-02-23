@@ -46,16 +46,17 @@ namespace Bookstore.Infrastructure
                 TagBuilder tb = new TagBuilder("a");
 
                 tb.Attributes["href"] = uh.Action(PageAction, new { page_number = i });
-
-                if (PageClassesEnabled)
+ 
+                if(PageClassesEnabled)
                 {
                     tb.AddCssClass(PageClass);
-                    tb.AddCssClass(i == PageNumbering.CurrentPage
-                    ? PageClassSelected : PageClassNormal);
-                    tb.InnerHtml.Append(i.ToString());
-
-                    final.InnerHtml.AppendHtml(tb);
+                    tb.AddCssClass(i == PageNumbering.CurrentPage ? PageClassSelected : PageClassNormal);
                 }
+                tb.AddCssClass(PageClass);
+                tb.InnerHtml.Append(i.ToString());
+
+                final.InnerHtml.AppendHtml(tb);
+           
                 tho.Content.AppendHtml(final.InnerHtml);
             }
         }
