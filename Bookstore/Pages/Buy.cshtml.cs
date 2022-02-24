@@ -28,9 +28,10 @@ namespace Bookstore.Pages
         public IActionResult OnPost(int bookId, string returnUrl)
         {
             Book b = repo.Books.FirstOrDefault(x => x.BookId == bookId);
+            double p = (repo.Books.Where(x => x.BookId == bookId).Select(x => x.Price).Sum());
 
             basket = HttpContext.Session.GetJson<Basket>("basket") ?? new Basket();
-            basket.AddItem(b,1,1);
+            basket.AddItem(b, 1, p) ;
 
             HttpContext.Session.SetJson("basket", basket);
 
