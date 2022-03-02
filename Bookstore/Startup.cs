@@ -33,6 +33,7 @@ namespace Bookstore
                 options.UseSqlite(Configuration["ConnectionStrings:BookDBConnection"]);
             });
             services.AddScoped<IBookstoreRepository, EfBookstoreRespository>();
+            services.AddScoped<ICheckoutRepository, EfCheckoutRepository>();
 
             services.AddRazorPages();
             services.AddDistributedMemoryCache();
