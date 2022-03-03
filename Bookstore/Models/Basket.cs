@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Bookstore.Components;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -44,6 +45,11 @@ namespace Bookstore.Models
         {
             double sum = Items.Sum(x => x.Quantity * x.Price);
             return sum; 
+        }
+
+        public static implicit operator Basket(CartSummary v)
+        {
+            throw new NotImplementedException();
         }
     }
     
