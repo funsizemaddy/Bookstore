@@ -8,5 +8,9 @@ namespace Bookstore.Models
     public interface IBookstoreRepository
     {
         IQueryable<Book> Books { get; }
+
+        public void SaveBooks(Book b);
+        public void CreateBook(Book b);
+        public void DeleteBook(Book b);
     }
 }

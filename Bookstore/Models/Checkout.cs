@@ -30,5 +30,8 @@ namespace Bookstore.Models
         public string State { get; set; }
 
         public string ZipCode { get; set; }
+
+        [BindNever]
+        public bool PurchaseReceived { get; set; }
     }
 }

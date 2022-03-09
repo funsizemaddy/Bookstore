@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -13,6 +14,7 @@ namespace Bookstore.Models
         [Key]
         [Required]
         public int BookId { get; set; }
+        [Required]
         public string Title { get; set; }
         public string Author { get; set; }
         public string Publisher { get; set; }
@@ -21,5 +23,7 @@ namespace Bookstore.Models
         public string Category { get; set; }
         public int PageCount { get; set; }
         public double Price { get; set; }
+
+        
     }
 }
