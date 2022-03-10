@@ -2,11 +2,11 @@
 @inherits OwningComponentBase<ICheckoutRepository>
 
 @*references buytable parameters*@
-<BuyTable TableTitle="Unsold Books" Buy="UnsoldBooks" ButtonLabel="Purchased" CheckoutSelected="SoldBooks"></BuyTable>
+<BuyTable TableTitle="Unsold Books" Checkouts="UnsoldBooks" ButtonLabel="Purchased" CheckoutSelected="ShipBooks"></BuyTable>
 
-<BuyTable TableTitle="Purchased Books" Buy="SoldBooks" ButtonLabel="Reset" CheckoutSelected="ResetCheckout"></BuyTable>
+<BuyTable TableTitle="Purchased Books" Checkouts="SoldBooks" ButtonLabel="Reset" CheckoutSelected="UpdateShipping"></BuyTable>
 
-<button class="btn btn-info" onclick="@(x =>UpdateData())">Refresh Data</button>
+<button class="btn btn-info" @onclick="@(x => UpdateData())">Refresh Data</button>
 
 @code {
 
@@ -23,16 +23,16 @@
 
     public async Task UpdateData()
     {
-        AllBooks = await repo.checkouts.ToListAsync();
+        AllBooks = await repo.Checkouts.ToListAsync();
         UnsoldBooks = AllBooks.Where(x => !x.PurchaseReceived);
         SoldBooks = AllBooks.Where(x => x.PurchaseReceived);
     }
 
-    public void SoldBooks(int id) => UpdateCheckout(id, true);
-    public void ResetCheckout(int id) => UpdateCheckout(id, false);
-    private void UpdateCheckout (int id, bool purchased)
+    public void ShipBooks(int id) => SyncShipping(id, true);
+    public void UpdateShipping(int id) => SyncShipping(id, false);
+    private void SyncShipping(int id, bool purchased)
     {
-        Checkout c = repo.checkouts.FirstOrDefault(x => x.CheckoutId == id);
+        Checkout c = repo.Checkouts.FirstOrDefault(x => x.CheckoutId == id);
         c.PurchaseReceived = purchased;
         repo.SaveCheckout(c);
     }

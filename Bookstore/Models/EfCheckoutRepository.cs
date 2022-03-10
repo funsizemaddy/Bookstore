@@ -14,7 +14,7 @@ namespace Bookstore.Models
         {
             context = temp;
         }
-        public IQueryable<Checkout> checkouts => context.checkouts.Include(x => x.Lines).ThenInclude(x => x.Book); 
+        public IQueryable<Checkout> Checkouts => context.Checkouts.Include(x => x.Lines).ThenInclude(x => x.Book); 
 
         public void SaveCheckout(Checkout checkout)
         {
@@ -22,7 +22,7 @@ namespace Bookstore.Models
             
             if (checkout.CheckoutId == 0)
             {
-                context.checkouts.Add(checkout);
+                context.Checkouts.Add(checkout);
             }
             context.SaveChanges();
         }

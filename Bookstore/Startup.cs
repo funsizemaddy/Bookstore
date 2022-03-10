@@ -42,7 +42,7 @@ namespace Bookstore
             services.AddScoped<Basket>(x => SessionBasket.GetBasket(x));
             // connected to SessionBasket
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            services.AddServerSideBlazor();
+            services.AddServerSideBlazor().AddCircuitOptions(options => { options.DetailedErrors = true; });
         
         }
 

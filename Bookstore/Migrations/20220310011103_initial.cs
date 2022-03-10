@@ -2,14 +2,14 @@
 
 namespace Bookstore.Migrations
 {
-    public partial class AddCheckout : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
            
 
             migrationBuilder.CreateTable(
-                name: "checkouts",
+                name: "Checkouts",
                 columns: table => new
                 {
                     CheckoutId = table.Column<int>(nullable: false)
@@ -19,11 +19,12 @@ namespace Bookstore.Migrations
                     AddressLine2 = table.Column<string>(nullable: true),
                     City = table.Column<string>(nullable: false),
                     State = table.Column<string>(nullable: false),
-                    ZipCode = table.Column<string>(nullable: true)
+                    ZipCode = table.Column<string>(nullable: true),
+                    PurchaseReceived = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_checkouts", x => x.CheckoutId);
+                    table.PrimaryKey("PK_Checkouts", x => x.CheckoutId);
                 });
 
             migrationBuilder.CreateTable(
@@ -47,9 +48,9 @@ namespace Bookstore.Migrations
                         principalColumn: "BookId",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_BasketLineItem_checkouts_CheckoutId",
+                        name: "FK_BasketLineItem_Checkouts_CheckoutId",
                         column: x => x.CheckoutId,
-                        principalTable: "checkouts",
+                        principalTable: "Checkouts",
                         principalColumn: "CheckoutId",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -74,7 +75,7 @@ namespace Bookstore.Migrations
                 name: "Books");
 
             migrationBuilder.DropTable(
-                name: "checkouts");
+                name: "Checkouts");
         }
     }
 }

@@ -1,18 +1,19 @@
 ﻿<table class="table table-sm table-striped table-bordered">
 
-    <thead>
-        <tr>
+    <thead class="thead-dark">
+        <tr class="table-dark">
             <th colspan="5" class="text-center">@TableTitle</th>
         </tr>
     </thead>
 
     <tbody>
-        @if (checkouts?.Count() > 0)
+        @if (Checkouts?.Count() > 0)
             {
-                @foreach (Checkout c in checkouts)
+                @foreach (Checkout c in Checkouts)
                 {
-                    <tr>
+                    <tr class="fw-bold table-success">
                         <td>@c.Name</td>
+                        <td>@c.ZipCode</td>
                         <td>Title</td>
                         <td>Quantity</td>
 
@@ -48,7 +49,7 @@
     public string TableTitle { get; set; } = "Sales";
 
     [Parameter]
-    public IEnumerable<Checkout> checkouts { get; set; }
+    public IEnumerable<Checkout> Checkouts { get; set; }
 
     [Parameter]
     public string ButtonLabel { get; set; } = "Sold";

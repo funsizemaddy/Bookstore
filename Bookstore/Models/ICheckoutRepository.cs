@@ -7,7 +7,7 @@ namespace Bookstore.Models
 {
     public interface ICheckoutRepository
     {
-        IQueryable<Checkout> checkouts { get; }
+        IQueryable<Checkout> Checkouts { get; }
 
         void SaveCheckout(Checkout checkout);
     }
